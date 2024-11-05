@@ -1,0 +1,62 @@
+# This "input" configures a global authorization rule to enable public access to
+# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
+input AMPLIFY {
+  globalAuthRule: AuthRule = { allow: public }
+} # FOR TESTING ONLY!
+type Device @model(subscriptions: null) {
+  id: ID!
+  name: String!
+  type: String! # Ex: SC, LEC etc
+  typeDescription: String # Ex: Symbio 800
+  typeCode: String # Ex: S800
+  buildingId: ID!
+    @index(
+      name: "byBuilding"
+      sortKeyFields: ["id"]
+      queryField: "listDevicesByBuilding"
+    )
+  building: Building @belongsTo(fields: ["buildingId"])
+  deviceId: ID
+    @index(
+      name: "byParentDevice"
+      sortKeyFields: ["id"]
+      queryField: "listDevicesByParent"
+    )
+}
+type User @model(subscriptions: null) {
+  id: ID! # This is Cognito user ID (sub) OR Cognito Group
+  # This is azure userId set by lambda hooks
+  userId: ID!
+  # ownerId: ID! # This for Auth, the ownerfield can't be the ID, Amplify limitation, this needs to be copied by lambda trigger
+
+  firstName: String!
+  lastName: String!
+  email: String
+    @index(
+      name: "byEmail"
+      queryField: "getUserByEmail"
+      sortKeyFields: ["userId"]
+    )
+  secondaryEmail: String
+  jobTitle: String
+  buildings: [Building] @hasMany(indexName: "byUser", fields: ["id"])
+}
+
+type Building @model(subscriptions: null) {
+  # REQUIRED
+  id: ID!
+  buildingId: ID # This is just duplicate ID for Auth, Amplify doesn't allow auth on Partition Key
+  name: String
+  floorArea: Float
+  address: String
+  address2: String
+  city: String
+  state: String
+  postalCode: String
+  country: String
+  lat: Float
+  long: Float
+  devices: [Device] @hasMany(indexName: "byBuilding", fields: ["id"])
+  userId: ID @index(name: "byUser", queryField: "listBuildingCreatedByUser")
+  createdBy: User @belongsTo(fields: ["userId"])
+}

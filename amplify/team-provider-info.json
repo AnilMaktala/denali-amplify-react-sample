@@ -1,0 +1,23 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-denaliamplifyreactsa-dev-88ed6-authRole",
+      "UnauthRoleArn": "arn:aws:iam::590184051493:role/amplify-denaliamplifyreactsa-dev-88ed6-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::590184051493:role/amplify-denaliamplifyreactsa-dev-88ed6-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-denaliamplifyreactsa-dev-88ed6-deployment",
+      "UnauthRoleName": "amplify-denaliamplifyreactsa-dev-88ed6-unauthRole",
+      "StackName": "amplify-denaliamplifyreactsa-dev-88ed6",
+      "StackId": "arn:aws:cloudformation:us-east-1:590184051493:stack/amplify-denaliamplifyreactsa-dev-88ed6/42d72060-9b92-11ef-aede-0e73da89f1cd",
+      "AmplifyAppId": "d1ahsmdyh1me91"
+    },
+    "categories": {
+      "api": {
+        "denaliamplifyreactsa": {}
+      },
+      "auth": {
+        "denaliamplifyreactsaa91ac20d": {}
+      }
+    }
+  }
+}
