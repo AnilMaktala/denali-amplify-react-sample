@@ -8,6 +8,7 @@ import { withAuthenticator, Button, Heading } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import { type AuthUser } from "aws-amplify/auth";
 import { type UseAuthenticator } from "@aws-amplify/ui-react-core";
+import "./App.css";
 
 // Constants and types
 const initialState: CreateDeviceInput = { name: "", type: "", buildingId: "" };
